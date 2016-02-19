@@ -1,0 +1,63 @@
+---
+title: 'Tarea: Peak-calling choices'
+author: "Amaranta Manrique de Lara y Ramirez, Claudia Saraí Reyes Ávila, Valeria Eréndira Mateo Estrada"
+date: "18 de febrero de 2016"
+output: html_document
+---
+
+## Introducción
+
+- size: ~1/2 page
+- context
+- general motivation of the analysis
+- particular questions/approaches addressed in this document
+
+
+
+## Métodos
+
+
+~ 1/2 page + all details in supplementary material
+
+- list of the resources and tools
+- explanation of the main methodological choices
+
+
+
+## Resultados
+
+~ 2 pages, figures and tables non-included
+
+* * * * * * 
+
+## Conclusiones y perspectivas
+
+~ 1/2 page, with summary of the results, some consideration about their relevance, and a perspective (what coul be done next ?)
+
+
+* * * * * * 
+
+## Material suplementario
+
+An essential issue of scientific activity is  tractability (how were the results produced?) and reroducibility (can someone else reproduce the experiment, and get the same results?): the supmat must contain the precise list of all the commands / parameters used to achieve the results
+
+
+### Fuentes de datos
+
+A complete list of the data sources: provide the original IDs of the datasets (e.g. Gene Expression Omnibus GSE or GSM IDs, ArrayExpress IDs).
+
+### Recursos bioinformáticos utilizados
+
+The Table below indicates the bioinformatics resources (tools, databases) used for this analysis.
+
+| Acronym | Description | URL | 
+|---------|-------------|-----|
+| RSAT | Regulatory Sequence Analysis Tools | <http://rsat.eu/> |
+| ... | .... | ... Please complete the table ... |
+
+### Lista de comandos y parámetros 
+
+Please indicate here the complete list of tools, commands and parameters used to produce the results. In principle this should enable anyone to reproduce your analysis.
+
+* * * * * * *
+
