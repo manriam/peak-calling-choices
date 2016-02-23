@@ -1,20 +1,24 @@
 ---
-title: 'Tarea: Peak-calling choices'
+title: '<span style="color:darkblue">Tarea: Peak-calling choices</span>'
 author: "Amaranta Manrique de Lara y Ramirez, Claudia Saraí Reyes Ávila, Valeria Eréndira Mateo Estrada"
-date: "18 de febrero de 2016"
+date: "24 de febrero de 2016"
 output: html_document
 ---
 
-## Introducción
+##<span style="color:blue">Introducción</span>
 
 - size: ~1/2 page
 - context
 - general motivation of the analysis
 - particular questions/approaches addressed in this document
 
+El método de **ChIP-seq** es utilizado para localizar sitios de unión para factores de transcripción o marcas en la cromatina a lo largo de todo el genoma^[1]^. Éste se caracteriza por combinar dos poderosas herramientas: la inmunoprecipitación de la cromatina y las nuevas tecnologías de secuenciación masiva^[2]^.Posterior a la secuenciación se mapean las lecturas contra un genoma de referencia. Los picos de ChIP-Seq son las regiones ricas en lecturas y pueden obtenerse mediante el uso de algoritmos peak-calling, como por ejemplo **MACS** y **SWEMBL**. Los picos de ChIP-seq proporcionan información precisa sobre la localización de los sitios de unión de promotores y reflejan la diversidad de los sitios. 
 
+La amplitud y número de los picos dependen del peak-caller utilizado. La evaluación de los picos encontrados requiere de la selección de varios criterios. Entre los criterios se encuentran: significancia, enriquecimiento del motivo de referencia, concentración del motivo de referencia y de los motivos encontrados en el centro de los picos y relevancia biológica. RSAT es un sitio web que provee herramientas diseñadas específicamente para la detección de elementos regulatorios en secuencias no codificantes^[3]^.
 
-## Métodos
+A pesar de ser un método ampliamente utilizado en la investigación de organismos modelo, regulación génica, desarrollo, enfermedades y vías biológicas; puede llegar a tener grandes variaciones en la interpretación de resultados de acuerdo a la metodología que se haya empleado, los criterios utilizados y sus valores asignados. No obstante, también hay una gran diversidad  de formas en la que se puede evaluar la calidad del experimento^[4]^.
+
+##<span style="color:blue">Métodos</span>
 
 
 ~ 1/2 page + all details in supplementary material
@@ -22,31 +26,48 @@ output: html_document
 - list of the resources and tools
 - explanation of the main methodological choices
 
+El conjunto de datos fue obtenido de los de ***Arabidopsis thaliana*** disponibles en el servidor *tepeu*. Ya que se pretendía comparar los métodos, se eligió al menos un archivo FASTA de cada método: **MACS** y **SWEMBL**. Se tomaron muestras representativas de cada método según los parámetros en los que divergían: los valores R en el caso de SWEMBL (0.1,  0.05, 0.01), y los valores *q* y *p* para MACS (0.001 y 0.00001). 
 
+Además de los datos de *A. thaliana* descargados, se corrieron tres controles: uno negativo para MACS, uno negativo para SWEMBL, y además se decidió utilizar el caso de estudio del protocolo^[S1]^ como control positivo del buen uso de las herramientas RSAT.
 
-## Resultados
+Se escogieron como criterios de medida: significancia, consistencia y enriquecimiento.
+
+1. Significancia:
+	+  Uso de la herramienta ***peak-motifs***.
+	+ Visualización de los resultados en la sección __**Discovered morifs**__.
+	+ Descarga de matrices en formato **TRANSFAC**.
+2. Consistencia:
+	+ Uso de la herramienta ***matrix-clustering*** con las matrices obtenidas en el paso anterior. 
+	+ Visualización de los clústeres de motivos. 
+3. Enriquecimiento: 
+
+Para los controles negativos, se hizo un paso previo con la herramienta ***random genome fragments***.
+
+##<span style="color:blue">Resultados</span>
 
 ~ 2 pages, figures and tables non-included
 
 * * * * * * 
 
-## Conclusiones y perspectivas
+##<span style="color:blue">Conclusiones y perspectivas</span>
 
 ~ 1/2 page, with summary of the results, some consideration about their relevance, and a perspective (what coul be done next ?)
 
 
 * * * * * * 
 
-## Material suplementario
+##<span style="color:blue">Material suplementario</span>
 
 An essential issue of scientific activity is  tractability (how were the results produced?) and reroducibility (can someone else reproduce the experiment, and get the same results?): the supmat must contain the precise list of all the commands / parameters used to achieve the results
 
+^[S1]^ Acceso directo a las coordenadas de los picos del caso de estudio: [GSM1482283_MYB3R3-GFP_ChIP_peaks](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM1482nnn/GSM1482283/suppl/GSM1482283_MYB3R3-GFP_ChIP_peaks.bed.txt.gz).
 
-### Fuentes de datos
+
+###<span style="color:lightblue">Fuentes de datos</span>
 
 A complete list of the data sources: provide the original IDs of the datasets (e.g. Gene Expression Omnibus GSE or GSM IDs, ArrayExpress IDs).
 
-### Recursos bioinformáticos utilizados
+###<span style="color:lightblue">Recursos bioinformáticos utilizados</span>
 
 The Table below indicates the bioinformatics resources (tools, databases) used for this analysis.
 
@@ -55,9 +76,146 @@ The Table below indicates the bioinformatics resources (tools, databases) used f
 | RSAT | Regulatory Sequence Analysis Tools | <http://rsat.eu/> |
 | ... | .... | ... Please complete the table ... |
 
-### Lista de comandos y parámetros 
+###<span style="color:lightblue">Lista de comandos y parámetros</span> 
 
 Please indicate here the complete list of tools, commands and parameters used to produce the results. In principle this should enable anyone to reproduce your analysis.
+
+####<span style="color:blue">Significancia</span>
+
+Control positivo
+
+```
+nice -n 19 $RSAT/perl-scripts/peak-motifs  -v 1 -title
+'A.thaliana_MYB3R3_versus_GFP_-_GSM1482283'  -i
+$RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.041326_2016-02-22.041326_P20t6n/peak-motifspeak_seq
+ -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5  -minol 6 -maxol
+7  -no_merge_lengths -2str  -origin center  -motif_db ArabidopsisPBM tf
+$RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf
+-motif_db footprintDB-plants tf
+$RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db
+jaspar_core_plants tf
+$RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf
+-scan_markov 1 -source galaxy  -task
+purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan
+-prefix peak-motifs -noov -img_format png  -outdir
+$RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.041326_2016-02-22.041326_P20t6n
+```
+
+Control negativo (SWEMBL)
+
+```
+peak-motifs  -v 1 -title Negative_Control_Aramacs -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.053718_2016-02-22.053718_XhY3lX/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.053718_2016-02-22.053718_XhY3lX
+```
+
+Control negativo (MACS)
+
+```
+peak-motifs  -v 1 -title AramacsR0.01 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.060543_2016-02-22.060543_unMKuV/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.060543_2016-02-22.060543_unMKuV
+```
+
+R0.05 (SWEMBL)
+
+```
+peak-motifs  -v 1 -title R0.05 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq
+```
+
+R0.01 (SWEMBL)
+
+```
+peak-motifs  -v 1 -title R0.01 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq
+```
+
+R0.1 (SWEMBL)
+
+```
+peak-motifs  -v 1 -title R0.1 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq
+```
+
+QVAL0.001 (MACS2)
+
+```
+peak-motifs  -v 1 -title R0.001 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq
+```
+
+PVAL0.00001 (MACS14)  
+
+```
+peak-motifs  -v 1 -title MACS14 -i $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq/peak-motifspeak_seq -max_seq_len 1000 -markov auto -disco oligos,positions -nmotifs 5 -minol 6 -maxol 7 -no_merge_lengths -2str -origin center -motif_db ArabidopsisPBM tf $RSAT/public_html/motif_databases/ArabidopsisPBM/ArabidopsisPBM_2015-11-06.tf -motif_db footprintDB-plants tf $RSAT/public_html/motif_databases/footprintDB/footprintDB.plants.motif.tf -motif_db jaspar_core_plants tf $RSAT/public_html/motif_databases/JASPAR/Jaspar_2016/jaspar_core_plants_2016.tf -scan_markov 1 -source galaxy -task purge,seqlen,composition,disco,merge_motifs,split_motifs,motifs_vs_motifs,timelog,archive,synthesis,small_summary,motifs_vs_db,scan -prefix peak-motifs -noov -img_format png -outdir $RSAT/public_html/tmp/apache/2016/02/22/peak-motifs.2016-02-22.214718_2016-02-22.214718_sDCADq
+```
+
+####<span style="color:blue">Consistencia</span>
+
+Control positivo
+
+```
+nice -n 19 $RSAT/perl-scripts/matrix-clustering  -v 1 -max_matrices 300
+-matrix_format transfac -i
+$RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032257_lNsGoI/matrix-clustering_query_matrices.transfac
+-hclust_method average -title 'control_-_myb3r3_discovered_motifs'
+-metric_build_tree 'Ncor' -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name
+-return json,heatmap  -o
+$RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032257_lNsGoI/matrix-clustering
+2>
+$RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032257_lNsGoI/matrix-clustering_err.txt
+```
+
+Control negativo (SWEMBL)
+
+```
+nice -n 19 $RSAT/perl-scripts/matrix-clustering -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032544_jY6DHE/matrix-clustering_query_matrices.transfac -hclust_method average -title 'negative_control_araswemble' -metric_build_tree 'Ncor' -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name -return json,heatmap -o $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032544_jY6DHE/matrix-clustering 2> $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032544_jY6DHE/matrix-clustering_err.tx
+```
+
+Control negativo (MACS)
+
+```
+matrix-clustering  -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032142_DpGvbM/matrix-clustering_query_matrices.transfac -hclust_method median -title negative_control_aramacs_ -metric_build_tree Ncor -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name -return json,heatmap -o $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.032142_DpGvbM/matrix-clustering
+```
+
+R0.05 (SWEMBL)
+
+```
+nice -n 19 $RSAT/perl-scripts/matrix-clustering -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.223506_sPWugH/matrix-clustering_query_matrices.transfac -hclust_method average -title 'r05' -metric_build_tree 'Ncor' -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name -return json,heatmap -o $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.223506_sPWugH/matrix-clustering 2> $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.223506_sPWugH/matrix-clustering_err.txt
+```
+
+R0.01 (SWEMBL)
+
+R0.1 (SWEMBL)
+
+```
+$RSAT/perl-scripts/matrix-clustering  -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224509_XAnDrN/matrix-clustering_query_matrices.transfac -hclust_method average -title 'r0.1_discovered_motifs' -metric_build_tree 'Ncor' -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name -return json,heatmap  -o $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224509_XAnDrN/matrix-clustering 2> $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224509_XAnDrN/matrix-clustering_err.txt 
+```
+
+QVAL0.001 (MACS2)
+
+```
+matrix-clustering  -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.034250_pJU6Se/matrix-clustering_query_matrices.transfac -hclust_method average -title aramacsr0.01 -metric_build_tree Ncor -lth w 5 -lth cor 0.75 -lth Ncor 0.55 -label_in_tree name -return json,heatmap -o $RSAT/public_html/tmp/apache/2016/02/23/matrix-clustering_2016-02-23.034250_pJU6Se/matrix-clustering
+
+```
+
+PVAL0.00001 (MACS14)
+
+```
+Command: nice -n 19 $RSAT/perl-scripts/matrix-clustering -v 1 -max_matrices 300 -matrix_format transfac -i $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224123_2H72Jx/matrix-clustering_query_matrices.transfac -hclust_method average -title 'macs14' -metric_build_tree 'Ncor' -lth w 5 -lth cor 0.7 -lth Ncor 0.55 -label_in_tree name -return json,heatmap -o $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224123_2H72Jx/matrix-clustering 2> $RSAT/public_html/tmp/apache/2016/02/22/matrix-clustering_2016-02-22.224123_2H72Jx/matrix-clustering_err.txt
+```
+***
+
+####<span style="color:darkblue">Referencias</span>
+
+^[1]^ J Castro-Mondragon, C Rioualen, B Contreras-Moreira, J van Helden (2016) [RSAT::Plants: motif discovery in ChIP-seq peaks of plant genomes](http://cursos.lcg.unam.mx/claroline/document/goto/?url=%2FJacques_van-Helden_BEII_2016%2FRSAT_protocols_for_students_only%2Fchapter_RSAT_plant_ChIP-seq_motifs.html&cidReq=BE2_2016#data-sources).
+
+^[2]^ Illumina. [Precise analysis of DNA-protein binding sequences: Combining chromatin immunoprecipitation with NGS for genome-wide surveys of gene regulation](http://www.illumina.com/techniques/sequencing/dna-sequencing/chip-seq.html).
+
+^[3]^[Regulatory Sequence Analysis Tools (RSAT)](http://embnet.ccg.unam.mx/rsa-tools/)
+
+* A Medina-Rivera, M Defrance, O Sand, C Herrmann, J Castro-Mondragon, J Delerce, S Jaeger, C Blanchet, P Vincens, C Caron, DM Staines, B Contreras-Moreira, M Artufel, L Charbonnier-Khamvongsa, C Hernandez, D Thieffry, M Thomas-Chollier, J van Helden J (2015) RSAT 2015: Regulatory Sequence Analysis Tools . Nucleic Acids Res. 
+
+* M Thomas-Chollier, M Defrance, A Medina-Rivera, O Sand, C Herrmann, D Thieffry,  van Helden (2011) RSAT 2011: regulatory sequence analysis tools. Nucleic Acids Res.
+
+* M Thomas-Chollier, O Sand, JV Turatsinze, R Janky, M Defrance, E Vervisch, S Brohee, J van Helden (2008) RSAT: regulatory sequence analysis tools. Nucleic Acids Res. 
+
+* J van Helden (2003) Regulatory sequence analysis tools. Nucleic Acids Res. 
+
+^[4]^ SG Landt, GK Marinov, A Kundaje, et al. (2012) [ChIP-seq guidelines and practices of the ENCODE and modENCODE consortia](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3431496/). Genome Research 22(9): 1813-1831.
 
 * * * * * * *
 
