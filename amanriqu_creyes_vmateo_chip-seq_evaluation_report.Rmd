@@ -1,8 +1,9 @@
 ---
 title: '<span style="color:darkblue">Tarea: Peak-calling choices</span>'
-author: "Amaranta Manrique de Lara y Ramirez, Claudia Saraí Reyes Ávila, Valeria Erendira Mateo Estrada"
+author: Amaranta Manrique de Lara y Ramirez, Claudia Saraí Reyes Ávila, Valeria Erendira
+  Mateo Estrada
 date: "24 de febrero de 2016"
-output: html_document
+output: pdf_document
 ---
 
 ##<span style="color:blue">Introducción</span>
@@ -25,7 +26,7 @@ Además de los datos de *E. coli* descargados, se corrieron dos controles: uno n
 
 A continuación se presentan los pasos para el análisis de criterios de medida: 
 
-1.  Significancia:
+1. Significancia:
   + Uso de la herramienta ***peak-motifs***.
 	+Visualización de los resultados en la sección __**Discovered motifs**__.
  	+Descarga de matrices en formato **TRANSFAC**.
@@ -46,6 +47,10 @@ A continuación se presentan los resultados de cada uno de los criterios.
 
 ###<span style="color:lightblue">Significancia</span> 
 
+A partir de correr peak-motifs obtuvimos los resultados de significancia los cuales se muestran en el material suplementario (Figuras 1.#.#). Ahora para comparar entre los métodos MACS y SWEMBL observamos sus valores de significancia; entre más grande sea el valor menos falsos positivos se tendrán en los motivos descubiertos.
+
+Los mayores valores de significancia se encuentran en MACS q0.0001 y en SWEMBL R0.05. Esto nos dice que la significancia es indistinta entre los métodos: En el caso de MACS el valor de q estima la tasa de falsos positivos descubiertos, por lo que a valores más pequeños se tendrá una mayor rigurosidad y menos falsos positivos; esto concuerda con lo observado en el experimento, ya que lo mejores valores de q0.0001 son los más pequeños estudiados. En el caso de SWEMBL no conocemos la representación más adecuada, pero con nuestros datos y las observaciones podemos inferir que funciona de manera similar que el valor q; es decir, entre más pequeños más riguroso y menos falso positivos encontraremos.
+
 ###<span style="color:lightblue">Consistencia</span>
 
 De los resultados de matrix-clustering, decidimos eliminar los clústeres en los que se anidaban motivos encontrados en los controles negativos. Asumimos que si un motivo predicho es similar a un control negativo, entonces es un falso positivo. De esta manera reducimos el número de clústeres a únicamente 12 que se presentan en el material suplementario (Figuras 2.1-12). 
@@ -53,7 +58,7 @@ De los resultados de matrix-clustering, decidimos eliminar los clústeres en los
 Para comparar entre MACS y SWEMBL un primer criterio es ver en cuántos de los clústeres significativos se encuentran representados los motivos de las diferentes condiciones. Pudimos observer que tanto MACS q0.0001 como SWEMBL R0.1 están representados en 8 de los 13 clústeres, mientras que MACS q0.01 y SWEMBL R0.5 se encuentran en 7. Finalmente, tanto MACS q0.1 y SWEMBL R0.05 aparecen únicamente en 6.
 
 Otro punto de comparación es si hay clústeres donde haya sólo resultados de MACS o sólo resultados de SWEMBL. Por ejemplo, el clúster 3 (Figura 2.1) tiene únicamente motivos encontrados con MACS. Por otro lado, los clústeres 17 (Figura 2.8), 21 (Figura 2.10), 22 (Figura 2.11) y 23 (Figura 2.12) tienen sólo motivos de SWEMBL. 
-Algo notable es cuando un método con un parámetro está representado más de una vez en un cluster. Por ejemplo, SWEMBL tanto con R0.1 como con R0.5 se agrupa dos veces cada uno en el cluster 8 (Figura 2.5), al igual que MACS q0.0001. De igual manera, SWEMBL R0.5 también se encuentra representado dos veces en el cluster 5 (Figura 2.2).
+Algo notable es cuando un método con un parámetro está representado más de una vez en un cluster. Por ejemplo, SWEMBL tanto con R0.1 como con R0.5 se agrupa dos veces cada uno en el cluster 8 (Figura 2.5), al igual que MACS q0.0001. De igual manera, SWEMBL R0.5 también se encuentra representado dos veces en el cluster 5 (Figura 2.2) y en el 16 (Figura 2.7).
 
 Creemos que estos resultados indican que SWEMBL es más sensible, porque detecta más motivos que MACS. Aunque R0.5 está representado en 7 clústeres mientras que R0.1 se encuentra en 7, consideramos que los resultados de R0.5 son más consistentes porque se agrupan entre ellos más veces. 
 
@@ -65,12 +70,23 @@ En este caso, se puede observar que en general las curvas son similares y no est
 
 Por otro lado, los clústeres 9, 16, 17, 19, 21 y 23 no siguen la misma tendencia. En las gráficas logarítmicas de cada uno de estos clústeres individuales (Figuras 3.7-12.2) se puede observar que aumentan los números de lecturas; esto está relacionado con una disminución de especificidad. 
 
+###<span style="color:lightblue">Golden standard</span>
+
+Como comparación con un golden standard, se indagó el motivo consenso (Figura 4.2) de unión a DNA de FNR según su matriz de posiciones disponible en RegulonDB. 
+
+Después comparamos con los consensos de los clústeres obtenidos en el criterio de consistencia para buscar un sobrelape y llegamos a la conclusión de que el cluster 16 tiene el consenso más similar al generado por cinco bases. Como figura significativa mostramos ambos logos juntos: 
+
+![fig](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\comp.jpg)
+
 * * * * * * 
 
 ##<span style="color:blue">Conclusiones y perspectivas</span>
 
+Del análisis de los cuatro criterios de calidad escogidos, podemos concluir que de los dos peak-callers utilizados en este trabajo, SWEMBL demostró ser el más apto para nuestro set de datos. Esto se debe a que fue más sensible, detectando motivos que no se detectaban a partir de los resultados de MACS. También podemos observar que según los valores que se le otorguen a R, la longitud de los motivos recuperados puede modificarse. Consideramos que el valor óptimo de R para nuestro set de datos es 0.5, ya que fue el más consistente en los clústeres encontrados. 
 
+Se podría discutir que R0.05 es un buen valor paramétrico para SWEMBL en este set de datos, ya que también observamos consistencia y se obtuvieron los mejores valores de significancia. Sin embargo, la comparación con el golden standard mostró que el motivo consenso del cluster 16 es el más cercano al obtenido de la matriz de posiciones anotada en la base de datos RegulonDB correspondiente al factor de transcripción. A pesar de que en el análisis de enriquecimiento el cluster 16 parecía no ser tan específico, sí se mostró consistente. Incluso en este cluster se ven representados dos motivos obtenidos de SWEMBL R0.5, lo cual valida nuestra hipótesis de que este método con este valor paramétrico son la mejor opción para el set de datos estudiado.
 
+Finalmente, pensamos que para elegir el mejor método no se puede tomar un único criterio en cuenta, y sin embargo tampoco se pueden tomar todos porque empiezan a contradecirse. Lo ideal sería hacer repeticiones para ir calibrando los parámetros y equilibrar su exactitud. 
 
 * * * * * * 
 
@@ -84,9 +100,9 @@ Además, se presentan imágenes de los resultados discutidos en el trabajo.
 
 Acceso directo a las coordenadas de los picos del caso de estudio (GEO Accession):
 
-![GSM1010219][http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1010219]
+[GSM1010219][http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1010219]
 
-![GSM1010224][http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1010224]
+[GSM1010224][http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1010224]
 
 ###<span style="color:lightblue">Recursos bioinformáticos utilizados</span>
 
@@ -144,23 +160,40 @@ Comandos utilizados con la herramienta matrix-quality
 nice -n 19 $RSAT/perl-scripts/matrix-quality -v 0 -ms $RSAT/public_html/tmp/apache/2016/03/09/matrix-quality_2016-03-09.215443_jybwEr/input_matrix -matrix_format transfac -pseudo 1 -seq sequence_set1 $RSAT/public_html/tmp/apache/2016/03/09/matrix-quality_2016-03-09.215443_jybwEr/sequence1.fasta -seq_format fasta -seq sequence_set2 $RSAT/public_html/tmp/apache/2016/03/09/matrix-quality_2016-03-09.215443_jybwEr/sequence2.fasta -perm sequence_set1 1 -perm sequence_set2 0 -perm_sep -bgfile $RSAT/public_html/data/genomes/Escherichia_coli_K_12_substr__MG1655_uid57779/oligo-frequencies/1nt_upstream-noorf_Escherichia_coli_K_12_substr__MG1655_uid57779-ovlp-1str.freq.gz -bg_format oligo-analysis -bg_pseudo 0.01 -archive -o $RSAT/public_html/tmp/apache/2016/03/09/matrix-quality_2016-03-09.215443_jybwEr/matrix-quality_2016-03-09.215443
 ````
 
-####<span style="color:blue">Golden Standard</span>
+####<span style="color:blue">Golden standard</span>
 
-Comandos utilizados con la herramienta retrieve sequence a partir de datos de FNR en RegulonDB.
+Comandos utilizados con la herramienta conver-matrix a partir de una Position-Weight Matrix de FNR en RegulonDB.
 
-Control positivo 
 ````
-$RSAT/perl-scripts/retrieve-seq  -org Escherichia_coli_K_12_substr__MG1655_uid57779 -feattype gene -type upstream -format fasta -label name -from -1 -to -400 -noorf  -rm  -i $RSAT/public_html/tmp/apache/2016/03/09/retrieve-seq_2016-03-09.202443_wNR7La.genes
+$RSAT/perl-scripts/convert-matrix  -from tab -to tab -i $RSAT/public_html/tmp/apache/2016/03/10/convert-matrix_2016-03-10.031652_PzMdic_input.tab -pseudo 1 -multiply 1 -decimals 2 -perm 0 -bg_pseudo 0.01 -logo_format png  -logo_file $RSAT/public_html/tmp/apache/2016/03/10/convert-matrix_2016-03-10.031652_PzMdic_output.tab_logo -return counts,counts,frequencies,consensus,parameters,header,margins,logo -v 1 -to tab -o $RSAT/public_html/tmp/apache/2016/03/10/convert-matrix_2016-03-10.031652_PzMdic_output.tab
 ````
-
-Comandos utilizados con la herramienta random sequences
-
-Control negativo
-````
-$RSAT/perl-scripts/random-seq  -template_format len -i $RSAT/public_html/tmp/apache/2016/03/09/random-seq_2016-03-09.203040_bm0KQ8.lengths -lw 50 -format fasta  -bg upstream-noorf -org Escherichia_coli_K_12_substr__MG1655_uid57779 -ol 6 -type dna
-````
-
 ###<span style="color:lightblue">Figuras</span> 
+
+####<span style="color:blue">Significancia</span>
+Figura 1.1.1 (SWEMBL R0.05)
+![Figura 1.1.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.05.1.jpg)
+Figura 1.1.2 (SWEMBL R0.05)
+![Figura 1.1.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.05.2.jpg)
+Figura 1.2.1 (SWEMBL R0.1)
+![Figura 1.2.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.1.1.jpg)
+Figura 1.2.2 (SWEMBL R0.1)
+![Figura 1.2.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.1.2.jpg)
+Figura 1.3.1 (SWEMBL R0.5)
+![Figura 1.3.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.5.1.jpg)
+Figura 1.3.2 (SWEMBL R0.5)
+![Figura 1.3.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\r0.5.2.jpg)
+Figura 1.4.1 (MACS q0.0001)
+![Figura 1.4.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.0001.1.jpg)
+Figura 1.4.2 (MACS q0.0001)
+![Figura 1.4.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.0001.2.jpg)
+Figura 1.5.1 (MACS q0.01)
+![Figura 1.5.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.01.1.jpg)
+Figura 1.5.2 (MACS q0.01)
+![Figura 1.5.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.01.2.jpg)
+Figura 1.6.1 (MACS q0.0001)
+![Figura 1.6.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.1.1.jpg)
+Figura 1.6.2 (MACS q0.0001)
+![Figura 1.6.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\q0.1.2.jpg)
 
 ####<span style="color:blue">Consistencia</span>
 Figura 2.1
@@ -191,52 +224,58 @@ Figura 2.12
 ####<span style="color:blue">Enriquecimiento</span>
 Figura 3.1.1
 ![Figura 3.1.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster03graph.jpg)
-Figura 3.1.1
+Figura 3.1.2
 ![Figura 3.1.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster03log.jpg)
 Figura 3.2.1
 ![Figura 3.2.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster05graph.jpg)
-Figura 3.2.1
+Figura 3.2.2
 ![Figura 3.2.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster05log.jpg)
 Figura 3.3.1
 ![Figura 3.3.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster06graph.jpg)
-Figura 3.3.1
+Figura 3.3.2
 ![Figura 3.3.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster06log.jpg)
 Figura 3.4.1
 ![Figura 3.4.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster07graph.jpg)
-Figura 3.4.1
+Figura 3.4.2
 ![Figura 3.4.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster07log.jpg)
 Figura 3.5.1
 ![Figura 3.5.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster08graph.jpg)
-Figura 3.5.1
+Figura 3.5.2
 ![Figura 3.5.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster08log.jpg)
 Figura 3.6.1
 ![Figura 3.6.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster09graph.jpg)
-Figura 3.6.1
+Figura 3.6.2
 ![Figura 3.6.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster09log.jpg)
 Figura 3.7.1
 ![Figura 3.7.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster16graph.jpg)
-Figura 3.7.1
+Figura 3.7.2
 ![Figura 3.7.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster16log.jpg)
 Figura 3.8.1
 ![Figura 3.8.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster17graph.jpg)
-Figura 3.8.1
+Figura 3.8.2
 ![Figura 3.8.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster17log.jpg)
 Figura 3.9.1
 ![Figura 3.9.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster19graph.jpg)
-Figura 3.9.1
+Figura 3.9.2
 ![Figura 3.9.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster19log.jpg)
 Figura 3.10.1
 ![Figura 3.10.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster21graph.jpg)
-Figura 3.10.1
+Figura 3.10.2
 ![Figura 3.10.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster21log.jpg)
 Figura 3.11.1
 ![Figura 3.11.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster22graph.jpg)
-Figura 3.11.1
+Figura 3.11.2
 ![Figura 3.11.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster22log.jpg)
 Figura 3.12.1
 ![Figura 3.12.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster23graph.jpg)
-Figura 3.12.1
+Figura 3.12.2
 ![Figura 3.12.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster23log.jpg)
+
+####<span style="color:blue">Golden standard</span>
+Figura 4.1
+![Figura 4.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\consensus.jpg)
+Figura 4.2
+![Figura 4.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\consensuslogo.jpg)
 
 ***
 
