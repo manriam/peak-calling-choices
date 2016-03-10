@@ -142,31 +142,31 @@ $RSAT/perl-scripts/random-seq  -template_format len -i $RSAT/public_html/tmp/apa
 
 ####<span style="color:blue">Consistencia</span>
 Figura 2.1
-![Figura 2.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster04.jpg)
-Figura 2.1
-![Figura 2.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster04.jpg)
-Figura 2.2 
-![Figura 2.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster05.jpg)
+![Figura 2.1](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster03.jpg)
+Figura 2.2
+![Figura 2.2](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster04.jpg)
 Figura 2.3 
-![Figura 2.3](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster06.jpg)
+![Figura 2.3](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster05.jpg)
 Figura 2.4 
-![Figura 2.4](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster07.jpg)
+![Figura 2.4](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster06.jpg)
 Figura 2.5 
-![Figura 2.5](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster08.jpg)
+![Figura 2.5](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster07.jpg)
 Figura 2.6 
-![Figura 2.6](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster09.jpg)
+![Figura 2.6](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster08.jpg)
 Figura 2.7 
-![Figura 2.7](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster16.jpg)
+![Figura 2.7](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster09.jpg)
 Figura 2.8 
-![Figura 2.8](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster17.jpg)
+![Figura 2.8](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster16.jpg)
 Figura 2.9 
-![Figura 2.9](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster19.jpg)
+![Figura 2.9](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster17.jpg)
 Figura 2.10 
-![Figura 2.10](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster21.jpg)
+![Figura 2.10](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster19.jpg)
 Figura 2.11 
-![Figura 2.11](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster22.jpg)
+![Figura 2.11](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster21.jpg)
 Figura 2.12 
-![Figura 2.12](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster23.jpg)
+![Figura 2.12](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster22.jpg)
+Figura 2.13 
+![Figura 2.13](C:\Users\USUARIO\Documents\TODO - Lenovo backup\LCG\Semestre IV\Bioinformática\Jacques van Helden\peak-calling\cluster23.jpg)
 
 ####<span style="color:blue">Golden standard</span>
 
